@@ -119,7 +119,11 @@ export default function PlantListItem(props) {
         <Card>
           <Card.Img variant="top" src={props.photo} />
           <Card.Body className="mx-auto">
-            <Card.Title className="text-center"><h5>{props.nickname || props.name}</h5></Card.Title>
+            <Card.Title className="text-center">
+                <h5>
+                  {props.nickname || props.name}
+                  {props.hook && <i class="fas fa-pencil-alt fs-6 ml-1" style={{color: "#9BBBA7"}}/>}
+                </h5></Card.Title>
             <Card.Subtitle className="text-center">{props.nickname && props.name}</Card.Subtitle>
             {(!props.nickname && !props.noBreak) && <br/>}
           </Card.Body>
