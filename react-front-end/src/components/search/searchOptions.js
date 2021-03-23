@@ -27,7 +27,7 @@ export default function SearchOptions(props) {
   ));
 
   return (
-    <Row className="row-cols-auto justify-content-evenly text-left">
+    <Row className="row-cols-auto justify-content-evenly text-left pl-3">
       {optionItems}
       <Col className="col-1"></Col>
     </Row>
