@@ -93,6 +93,15 @@ module.exports = (pool) => {
     `, [userID, speciesID, nickname])
   };
 
+  const editGardenPlant = (plantID, nickname) => {
+    // TODO: add user verification -- only edit own plants
+    return pool.query(`
+      UPDATE plants
+      SET nickname = $2
+      WHERE id = $1;
+    `, [plantID, nickname])
+  };
+
   const movePlantToGraveyard = function(plantID) {
     return pool.query(`
       UPDATE plants
@@ -120,6 +129,7 @@ module.exports = (pool) => {
     isPlantOnWishlist,
     getUserTasks,
     addPlantToGarden,
+    editGardenPlant,
     movePlantToGraveyard,
     deletePlantFromGarden,
     randomUserID,
