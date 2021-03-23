@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Container, Button } from "react-bootstrap";
+import { useAuth0 } from "@auth0/auth0-react";
 import PlantModal from "./modal";
 import ConfirmForm from "./confirmForm";
 import EditForm from "./editForm";
@@ -8,6 +9,7 @@ axios.defaults.withCredentials = true
 
 
 export default function PlantListItem(props) {
+  const { isAuthenticated } = useAuth0();
   const [modalShow, setModalShow] = useState(false);
   const [confirmShow, setConfirmShow] = useState(false);
   const [onWishlist, setOnWishlist] = useState(props.wishlisted);
@@ -181,12 +183,12 @@ export default function PlantListItem(props) {
             </Row>
             {(props.gardenButton || props.wishlistButton) &&
               <Row className="justify-content-md-center mb-3">
-                {props.gardenButton &&
+                {(props.gardenButton && isAuthenticated) &&
                   <Col>
                     <Card.Link className="btn btn-outline-success w-100" onClick={() => setConfirmShow(true)}><i className="fas fa-plus-circle"></i><br />Garden</Card.Link>
                   </Col>
                 }
-                {props.wishlistButton &&
+                {(props.wishlistButton && isAuthenticated) &&
                   <Col className="text-right">
                     {!onWishlist &&
                       <Button variant="outline-success" block onClick={addToWishlist}><i className="far fa-heart"/><br/>Wishlist</Button>
