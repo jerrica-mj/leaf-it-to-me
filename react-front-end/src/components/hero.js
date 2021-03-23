@@ -17,8 +17,7 @@ const Styles = styled.div`
     font-size: 1.5em;
 
     .container {
-      margin-top: 60px;
-      margin-top: 5em;
+
       text-align: center;
 
       h1 {
@@ -35,15 +34,15 @@ export default function Hero(props) {
 
   return (
     <Styles>
-      <Jumbotron fluid>
+      <Jumbotron fluid className="d-flex align-items-center">
         <Container>
         <h1>{props.header}</h1>
         <p>
           {props.text}
         </p>
-        {props.children}
+          {props.children}
         <div>
-          {!isAuthenticated &&
+          {(!isAuthenticated && !props.noButton) &&
             <LoginButton>Get Started</LoginButton>
           }
           {(isAuthenticated && props.gardenButton) &&

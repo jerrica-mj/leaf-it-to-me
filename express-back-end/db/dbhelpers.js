@@ -6,7 +6,8 @@ module.exports = (pool) => {
     SELECT plants.id as id, user_id, species_id, nickname, description, scientific_name, is_dead, common_name, photo_url, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets
     FROM plants
     JOIN species ON species_id = species.id
-    WHERE user_id = $1;`, [userID]
+    WHERE user_id = $1
+    ORDER BY id;`, [userID]
     )
     .then(res => {
       return res.rows;
@@ -93,6 +94,15 @@ module.exports = (pool) => {
     `, [userID, speciesID, nickname])
   };
 
+  const editGardenPlant = (plantID, nickname) => {
+    // TODO: add user verification -- only edit own plants
+    return pool.query(`
+      UPDATE plants
+      SET nickname = $2
+      WHERE id = $1;
+    `, [plantID, nickname])
+  };
+
   const movePlantToGraveyard = function(plantID) {
     return pool.query(`
       UPDATE plants
@@ -120,6 +130,7 @@ module.exports = (pool) => {
     isPlantOnWishlist,
     getUserTasks,
     addPlantToGarden,
+    editGardenPlant,
     movePlantToGraveyard,
     deletePlantFromGarden,
     randomUserID,

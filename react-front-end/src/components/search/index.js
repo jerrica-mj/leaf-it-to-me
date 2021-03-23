@@ -106,6 +106,7 @@ export default function Search() {
         <Hero
           header="Find a Plant"
           text="Find your next plant here"
+          noButton
         >
           <Form  onSubmit={submitHandler}>
             <Row className="justify-content-md-center">

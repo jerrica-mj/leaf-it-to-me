@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { Card, Row, Col, Container, Button } from "react-bootstrap";
 import PlantModal from "./modal";
 import ConfirmForm from "./confirmForm";
+import EditForm from "./editForm";
 import axios from "axios";
 axios.defaults.withCredentials = true
-
-// import aloeVeraImage from "../../assets/aloe-vera-cropped.png";
 
 
 export default function PlantListItem(props) {
   const [modalShow, setModalShow] = useState(false);
   const [confirmShow, setConfirmShow] = useState(false);
   const [onWishlist, setOnWishlist] = useState(props.wishlisted);
+  const [showEdit, setShowEdit] = useState(false);
 
   const difficulty = () => {
     let msg = "";
@@ -76,6 +76,28 @@ export default function PlantListItem(props) {
     });
   };
 
+  const editGardenPlant = (nickname) => {
+    console.log("Updating plant", props.plantId, "nickame to:", nickname);
+
+
+
+    axios.post(`http://localhost:8080/garden/update/${props.plantId}`, {withCredentials: true, data: {
+      nickname}})
+      .then((res) => {
+        console.log("Server responded to garden plant edit request");
+        console.log(res.data);
+        // update state with new nickname
+        props.hook((prev) => {
+          const updatedList = [...prev];
+          const updatedPlant = {...prev[props.index], nickname};
+          updatedList.splice(props.index, 1, updatedPlant);
+          return updatedList;
+        });
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
   const addToWishlist = () => {
     console.log("Adding to wishlist plant id:", props.speciesId);
 
@@ -98,7 +120,7 @@ export default function PlantListItem(props) {
       console.log("Server responded to graveyard move request");
       console.log(res.data);
 
-
+      // remove moved plant from garden state
       props.hook && props.hook((prev) => {
         const updated = prev.filter((element) => {
           return element.id !== props.plantId;
@@ -119,7 +141,11 @@ export default function PlantListItem(props) {
         <Card>
           <Card.Img variant="top" src={props.photo} />
           <Card.Body className="mx-auto">
-            <Card.Title className="text-center"><h5>{props.nickname || props.name}</h5></Card.Title>
+            <Card.Title className="text-center">
+                <h5>
+                  {props.nickname || props.name}
+                  {props.hook && <i class="fas fa-pencil-alt fs-6 ml-1" style={{color: "#9BBBA7"}} onClick={() => {setShowEdit(true)}} />}
+                </h5></Card.Title>
             <Card.Subtitle className="text-center">{props.nickname && props.name}</Card.Subtitle>
             {(!props.nickname && !props.noBreak) && <br/>}
           </Card.Body>
@@ -182,40 +208,7 @@ export default function PlantListItem(props) {
               }
           </Container>
 
-
-          {/* <Card.Body className="mx-auto mb-1 text-center"> */}
-            {/* <Container fluid className="justify-content-md-center">
-              <Row className="mb-3 justify-content-md-center"> */}
-                {/* {props.gardenButton &&
-                  <Col lg={6}>
-                    <Card.Link className="btn btn-outline-success" onClick={() => setConfirmShow(true)}><i className="fas fa-plus-circle"></i><br />Garden</Card.Link>
-                  </Col>
-                }
-                {props.wishlistButton &&
-                  <Col lg={6}>
-                    <Card.Link className="btn btn-outline-success" onClick={addToWishlist}><i className="far fa-heart"></i> Wishlist</Card.Link>
-                  </Col>
-                } */}
-                {/* <Col>
-                  <Card.Link className="btn btn-success" onClick={() => setModalShow(true)}>
-                        See More
-                    </Card.Link>
-                </Col> */}
-              {/* </Row>
-
-              <Row className="mb-3 justify-content-md-center">
-                <Card.Link className="btn btn-success w-100" onClick={() => setModalShow(true)}>
-                        See More
-                </Card.Link>
-              </Row>
-
-              {props.hook &&
-              <Row className="justify-content-center">
-                    <Card.Link className="btn btn-outline-secondary" onClick={moveToGraveyard}><i className="fas fa-skull-crossbones"></i> Graveyard</Card.Link>
-              </Row>
-              }
-            </Container> */}
-
+          {/* Pop up / modal components */}
             <PlantModal
               name={props.name}
               scientificName={props.scientificName}
@@ -232,12 +225,16 @@ export default function PlantListItem(props) {
             />
             <ConfirmForm
               name={props.name}
-
               show={confirmShow}
               onHide={() => setConfirmShow(false)}
               onConfirm={addToGarden}
             />
-          {/* </Card.Body> */}
+            <EditForm
+              name={props.name}
+              show={showEdit}
+              onHide={() => setShowEdit(false)}
+              onConfirm={editGardenPlant}
+            />
         </Card>
       </div>
 

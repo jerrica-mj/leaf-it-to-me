@@ -18,7 +18,7 @@ var corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,
   methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
-  optionsSuccessStatus: 200 
+  optionsSuccessStatus: 200
 }
 
 app.use(cors(corsOptions));
@@ -71,6 +71,15 @@ app.get("/garden", (req, res) => {
 app.post("/garden/plant/:id", (req, res) => {
   const nickname = req.body.data.nickname;
   dbHelpers(db).addPlantToGarden(req.session.user_id, req.params.id, nickname).then((rows) => {
+    console.log(rows);
+    res.status(200).json(rows);
+  })
+});
+
+app.post("/garden/update/:id", (req, res) => {
+  const nickname = req.body.data.nickname;
+  console.log("Request to update plant", req.params.id, "to nickname:", nickname);
+  dbHelpers(db).editGardenPlant(req.params.id, nickname).then((rows) => {
     console.log(rows);
     res.status(200).json(rows);
   })
