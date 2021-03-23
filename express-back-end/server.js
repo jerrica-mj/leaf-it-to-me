@@ -117,9 +117,9 @@ app.delete("/wishlist", cors(corsOptions), (req, res) => {
     if(!userID) {
       res.redirect("/");
     }
-  db.removePlantFromWishlist(userID, wishlistID)
+  dbHelpers(db).removePlantFromWishlist(userID, wishlistID)
     .then(() => {
-      res.status(200).json(rows);
+      res.status(200);
     });
 });
 
