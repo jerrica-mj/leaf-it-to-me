@@ -77,16 +77,25 @@ export default function PlantListItem(props) {
   };
 
   const editGardenPlant = (nickname) => {
-    console.log("Updating plant's nickame to:", nickname);
+    console.log("Updating plant", props.plantId, "nickame to:", nickname);
 
-    // axios.post(`http://localhost:8080/garden/update/${props.speciesId}`, {withCredentials: true, data: {
-    //   nickname}})
-    // .then((res) => {
-    //   console.log("Server responded to garden plant edit request");
-    //   console.log(res.data);
-    // }).catch((err) => {
-    //   console.log(err);
-    // });
+
+
+    axios.post(`http://localhost:8080/garden/update/${props.plantId}`, {withCredentials: true, data: {
+      nickname}})
+      .then((res) => {
+        console.log("Server responded to garden plant edit request");
+        console.log(res.data);
+        // update state with new nickname
+        props.hook((prev) => {
+          const updatedList = [...prev];
+          const updatedPlant = {...prev[props.index], nickname};
+          updatedList.splice(props.index, 1, updatedPlant);
+          return updatedList;
+        });
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   const addToWishlist = () => {
@@ -111,7 +120,7 @@ export default function PlantListItem(props) {
       console.log("Server responded to graveyard move request");
       console.log(res.data);
 
-
+      // remove moved plant from garden state
       props.hook && props.hook((prev) => {
         const updated = prev.filter((element) => {
           return element.id !== props.plantId;

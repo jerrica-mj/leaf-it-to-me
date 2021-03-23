@@ -33,6 +33,7 @@ export default function PlantList(props) {
     return (
       <PlantListItem
         key={index}
+        index={index}
         nickname={item.nickname}
         name={item.common_name}
         scientificName={item.scientific_name}
@@ -49,6 +50,7 @@ export default function PlantList(props) {
         plantId={item.id}
         wishlisted={item.wishlisted}
         hook={props.hook}
+        list={props.list}
         gardenButton={props.gardenButton}
         wishlistButton={props.wishlistButton}
         noBreak={props.noBreak}
