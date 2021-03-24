@@ -15,7 +15,9 @@ ReactDOM.render(
   <Auth0Provider
     domain={DOMAIN}
     clientId={CLIENT_ID}
-    redirectUri={window.location.origin}
+    // redirectUri={window.location.origin}
+    // Set redirect to search page upon authorization
+    redirectUri="http://localhost:3000/search"
   >
     <App />
     <p></p>
