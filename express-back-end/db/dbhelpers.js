@@ -7,7 +7,7 @@ module.exports = (pool) => {
     FROM plants
     JOIN species ON species_id = species.id
     WHERE user_id = $1
-    ORDER BY id;`, [userID]
+    ORDER BY id DESC;`, [userID]
     )
     .then(res => {
       return res.rows;
@@ -32,7 +32,8 @@ module.exports = (pool) => {
     return pool.query(`
     SELECT * FROM wishlist
     JOIN species ON species_id = species.id
-    WHERE user_id = $1;
+    WHERE user_id = $1
+    ORDER BY wishlist.id DESC;
     `, [userID])
     .then(res => {
       return res.rows;
