@@ -49,6 +49,7 @@ export default function PlantList(props) {
         speciesId={item.species_id || item.id}
         plantId={item.id}
         wishlisted={item.wishlisted}
+        wishlistPage={props.wishlist}
         hook={props.hook}
         list={props.list}
         gardenButton={props.gardenButton}

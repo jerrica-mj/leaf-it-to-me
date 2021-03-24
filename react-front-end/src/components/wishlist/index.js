@@ -33,6 +33,9 @@ export default function Wishlist(props) {
       <Container>
         <PlantList
           list={myWishlist}
+          gardenButton
+          wishlistButton
+          wishlist
         />
       </Container>
     </>

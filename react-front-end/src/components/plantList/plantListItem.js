@@ -114,6 +114,13 @@ export default function PlantListItem(props) {
     });
   };
 
+  const removeFromWishlist = () => {
+    console.log("remove request received");
+    // update local state to remove from wishlist
+    setOnWishlist(false);
+    // request to API to remove from wishlist
+  };
+
   const moveToGraveyard = () => {
     console.log("Moving to graveyard plant id:", props.plantId);
 
@@ -190,11 +197,11 @@ export default function PlantListItem(props) {
                 }
                 {(props.wishlistButton && isAuthenticated) &&
                   <Col className="text-right">
-                    {!onWishlist &&
+                    {(!onWishlist && !props.wishlistPage) &&
                       <Button variant="outline-success" block onClick={addToWishlist}><i className="far fa-heart"/><br/>Wishlist</Button>
                     }
-                    {onWishlist &&
-                      <Button variant="outline-success" block disabled onClick={addToWishlist}><i className="fas fa-heart"/><br/>Wishlist</Button>
+                    {(onWishlist || props.wishlistPage) &&
+                      <Button variant="outline-secondary" block onClick={removeFromWishlist}><i className="fas fa-heart"/><br/>Unwish</Button>
                     }
                     {/* <Card.Link className="btn btn-outline-success w-100" onClick={addToWishlist}><i className="far fa-heart"></i><br/>Wishlist</Card.Link> */}
                   </Col>
