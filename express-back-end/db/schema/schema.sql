@@ -16,15 +16,15 @@ CREATE TABLE users (
 CREATE TABLE species (
   id SERIAL PRIMARY KEY NOT NULL,
   common_name VARCHAR(255) NOT NULL,
-  scientific_name VARCHAR(255) NOT NULL,
+  scientific_name VARCHAR(255),
   photo_url VARCHAR(255),
   description TEXT,
-  watering_instructions VARCHAR(255) NOT NULL,
+  watering_instructions VARCHAR(255),
   watering_requirement_rating INTEGER NOT NULL,
   sunlight_requirement_rating INTEGER NOT NULL,
   difficulty_rating INTEGER NOT NULL,
   temperature_requirements VARCHAR(100) NOT NULL,
-  fertilizer_requirements VARCHAR(100) NOT NULL,
+  fertilizer_requirements VARCHAR(100),
   poison_for_pets BOOLEAN NOT NULL DEFAULT FALSE
 );
 
