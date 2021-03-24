@@ -41,7 +41,7 @@ export default function LogoutButton() {
 
   return(
     <Styles>
-      <Button variant="secondary" className="mt-0" onClick={() => appLogout()} >
+      <Button variant="secondary" className="mt-0" size="sm" onClick={() => appLogout()} >
         Log Out
       </Button>
     </Styles>

@@ -28,8 +28,11 @@ const Styles = styled.div`
       }
     }
   }
-  .navbar-brand {
+  a.navbar-brand {
     font-size: 125%;
+    &:hover {
+      color: #3B715A;
+    }
   }
   a, .navbar-brand, .navbar-nav .nav-link {
     color: #3B715A;
@@ -89,7 +92,16 @@ export default function NavMenu(){
   return (
     <Styles>
       <Navbar expand="lg">
-        <Navbar.Brand href="/">Leaf It To Me</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img
+            src="https://github.com/JSmith604/LeafItToMe/blob/master/react-front-end/src/assets/logo-leaf.png?raw=true"
+            width="45em"
+            height="45em"
+            className="d-inline-block align-top pr-2"
+            alt="Logo leaf"
+          />
+          Leaf It To Me
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto flex-row">
@@ -123,12 +135,12 @@ export default function NavMenu(){
             } */}
           {isAuthenticated && <>
             <Nav.Item className="ml-auto">
-              <LogoutButton />
+              <LogoutButton/>
             </Nav.Item>
             {/* The following 3 all had class="pr-4", which was meant to be className */}
             <p className="pr-4"></p>
             <Nav.Item>
-                <Image src={user.picture} alt={user.email}roundedCircle fluid />
+                <Image src={user.picture} alt={user.email} roundedCircle fluid height="60em" width="60em"/>
             </Nav.Item>
           </>}
           </Nav>
