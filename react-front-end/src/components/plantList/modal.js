@@ -34,7 +34,7 @@ export default function PlantModal(props) {
           <Container style={greenText} >
             <Row>
               <Col xs={10} sm={6} md={4}>
-                <i className="fas fa-leaf icon" style={iconStyle} /> {props.difficulty};
+                <i className="fas fa-leaf icon" style={iconStyle} /> {props.difficulty}
               </Col>
               <Col xs={10} sm={6} md={4}>
                 <i className="fas fa-tint" style={iconStyle} /> every {props.waterDesc} days
