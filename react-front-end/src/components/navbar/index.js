@@ -91,7 +91,7 @@ export default function NavMenu(){
 
   return (
     <Styles>
-      <Navbar expand="lg">
+      <Navbar expand="lg" fixed="top">
         <Navbar.Brand href="/">
           <img
             src="https://github.com/JSmith604/LeafItToMe/blob/master/react-front-end/src/assets/logo-leaf.png?raw=true"
