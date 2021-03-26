@@ -30,7 +30,8 @@ module.exports = (pool) => {
 
   const getWishlistForUser = function(userID) {
     return pool.query(`
-    SELECT * FROM wishlist
+    SELECT wishlist.id as id, user_id, species_id, common_name, scientific_name, photo_url, description, watering_instructions, watering_requirement_rating, sunlight_requirement_rating, difficulty_rating, temperature_requirements, fertilizer_requirements, poison_for_pets
+    FROM wishlist
     JOIN species ON species_id = species.id
     WHERE user_id = $1
     ORDER BY wishlist.id DESC;
