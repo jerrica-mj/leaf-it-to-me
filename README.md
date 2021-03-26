@@ -1,4 +1,9 @@
-# React + Express No-Fluff Boilerplate
+# Leaf It To Me
+
+A full stack web application to help users find, track, and grow plants that thrive. Created as a final project for the Lighthouse Labs Full Stack Web Development Bootcamp.
+
+
+# About the Boilerplate
 
 A boilerplate project for anyone interested in making a project that uses React and Express.
 
