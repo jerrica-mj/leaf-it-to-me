@@ -36,6 +36,7 @@ export default function Wishlist(props) {
           gardenButton
           wishlistButton
           wishlist
+          updateWishlist={setMyWishlist}
         />
       </Container>
     </>
