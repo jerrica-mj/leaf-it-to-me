@@ -5,8 +5,8 @@ import {Container} from "react-bootstrap";
 import Hero from "../hero";
 import PlantList from "../plantList/plantList";
 
-export default function Graveyard(props) {
-  const [myGraveyard, setMyGraveyard] = useState([]);
+export default function Compost(props) {
+  const [myCompost, setMyCompost] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:8080/garden", {withCredentials: true})
@@ -18,7 +18,7 @@ export default function Graveyard(props) {
         return myPlant.is_dead === true;
       })
       console.log(filtered);
-      setMyGraveyard(filtered);
+      setMyCompost(filtered);
     })
     .catch((err) => {
       console.log(err);
@@ -28,14 +28,14 @@ export default function Graveyard(props) {
   return (
     <>
       <Hero
-        header="Plant Graveyard"
+        header="Plant Compost"
         text="Your plants that have moved on to a better place. RIP."
         gardenButton="true"
       ></Hero>
       <Container>
-      {/* <h2>Plant Graveyard</h2> */}
+      {/* <h2>Plant Compost</h2> */}
       <PlantList
-          list={myGraveyard}
+          list={myCompost}
         />
       </Container>
     </>
