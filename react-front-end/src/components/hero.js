@@ -50,9 +50,9 @@ export default function Hero(props) {
               <Button variant="success">See My Garden</Button>
             </Link>
           }
-          {(isAuthenticated && props.graveyardButton) &&
-            <Link to="/graveyard">
-              <Button variant="secondary">See Plant Graveyard</Button>
+          {(isAuthenticated && props.compostButton) &&
+            <Link to="/compost">
+              <Button variant="secondary">See Plant Compost</Button>
             </Link>
           }
         </div>

@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from "./components/home/index";
 import Search from "./components/search/index";
 import Garden from "./components/garden/index";
-import Graveyard from "./components/graveyard/index";
+import Compost from "./components/compost/index";
 import Login from "./components/login/index";
 // import NoMatch from "./components/NoMatch";
 import Layout from "./components/layout";
@@ -48,7 +48,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route path="/garden" component={Garden} />
-              <Route path="/graveyard" component={Graveyard} />
+              <Route path="/compost" component={Compost} />
               <Route path="/wishlist" component={Wishlist} />
               <Route path="/search" component={Search} />
               <Route path="/login" component={Login} />
