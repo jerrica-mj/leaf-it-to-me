@@ -121,12 +121,12 @@ export default function PlantListItem(props) {
     // request to API to remove from wishlist
   };
 
-  const moveToGraveyard = () => {
-    console.log("Moving to graveyard plant id:", props.plantId);
+  const moveToCompost = () => {
+    console.log("Moving to Compost plant id:", props.plantId);
 
     axios.get(`http://localhost:8080/graveyard/plant/${props.plantId}`, {withCredentials: true})
     .then((res) => {
-      console.log("Server responded to graveyard move request");
+      console.log("Server responded to compost move request");
       console.log(res.data);
 
       // remove moved plant from garden state
@@ -211,7 +211,7 @@ export default function PlantListItem(props) {
             {props.hook &&
               <Row className="mb-3">
                 <Col>
-                  <Card.Link className="btn btn-outline-secondary w-100" onClick={moveToGraveyard}><i className="fas fa-skull-crossbones"></i> Graveyard</Card.Link>
+                  <Card.Link className="btn btn-outline-secondary w-100" onClick={moveToCompost}><i className="fas fa-skull-crossbones"></i> Compost</Card.Link>
                 </Col>
               </Row>
               }
